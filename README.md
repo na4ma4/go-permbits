@@ -2,7 +2,7 @@
 
 Golang File Permission Bit Operators.
 
-[![CI](https://github.com/na4ma4/permbits/workflows/CI/badge.svg)](https://github.com/na4ma4/permbits/actions?query=workflow%3ACI)
+[![CI](https://github.com/na4ma4/permbits/actions/workflows/ci.yml/badge.svg)](https://github.com/na4ma4/permbits/actions/workflows/ci.yml)
 [![GoDoc](https://godoc.org/github.com/na4ma4/permbits/src/jwt?status.svg)](https://godoc.org/github.com/na4ma4/permbits)
 
 ## Usage
