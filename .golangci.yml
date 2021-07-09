@@ -1,0 +1,10 @@
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - forbidigo
+    - golint
+    - maligned
+    - interfacer
+    - paralleltest
+    - scopelint
