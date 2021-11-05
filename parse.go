@@ -26,6 +26,16 @@ const (
 // ErrModeStringSyntax is returned when there is a syntax error in the mode string.
 var ErrModeStringSyntax = errors.New("syntax error in mode string")
 
+// MustString is a wrapper around FromString that will panic on invalid syntax.
+func MustString(perms string) os.FileMode {
+	mode, err := FromString(perms)
+	if err != nil {
+		panic(err)
+	}
+
+	return mode
+}
+
 // FromString takes a subset of the available symbolic modes and returns a os.FileMode
 // that is comprised of them or 0 and an error if the input is invalid.
 //
