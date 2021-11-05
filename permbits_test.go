@@ -10,8 +10,8 @@ import (
 )
 
 var _ = Describe("Permbits Test", func() {
-	modeAll := os.FileMode(0777)
-	modeNone := os.FileMode(0000)
+	modeAll := os.FileMode(0o777)
+	modeNone := os.FileMode(0o000)
 
 	Describe("Is()", func() {
 		DescribeTable(
@@ -47,10 +47,10 @@ var _ = Describe("Permbits Test", func() {
 		)
 
 		It("Compare Multiple Modes", func() {
-			mode := os.FileMode(0777)
+			mode := os.FileMode(0o777)
 			Expect(permbits.Is(mode, permbits.UserAll+permbits.GroupAll+permbits.OtherAll)).To(BeTrue())
 
-			mode = os.FileMode(0775)
+			mode = os.FileMode(0o775)
 			Expect(permbits.Is(mode, permbits.UserAll+permbits.GroupAll+permbits.OtherAll)).To(BeFalse())
 		})
 	})
