@@ -50,13 +50,12 @@ func MustString(perms string) os.FileMode {
 // were added earlier in the mode string.
 //nolint:cyclop,funlen // it's a long function.
 func FromString(perms string) (os.FileMode, error) {
-	o := 0
+	out := 0
 	mode := []parseMode{}
 	apply := parseApplyNone
 
-	for i := 0; i < len(perms); i++ {
-		t := perms[i]
-		switch t {
+	for idx := 0; idx < len(perms); idx++ {
+		switch perms[idx] {
 		case 'u':
 			mode = append(mode, parseUser)
 		case 'g':
@@ -75,37 +74,37 @@ func FromString(perms string) (os.FileMode, error) {
 		case '=':
 			apply = parseApplySet
 		case 'r', 'w', 'x':
-			v := 0
+			val := 0
 
-			switch t {
+			switch perms[idx] {
 			case 'r':
-				v = 4
+				val = 4
 			case 'w':
-				v = 2
+				val = 2
 			case 'x':
-				v = 1
+				val = 1
 			}
 
 			for _, pv := range mode {
-				iv := v << pv
+				icv := val << pv
 
 				switch apply {
 				case parseApplyNone:
-					return os.FileMode(o), fmt.Errorf("%w: %s", ErrModeStringSyntax, perms)
+					return os.FileMode(out), fmt.Errorf("%w: %s", ErrModeStringSyntax, perms)
 				case parseApplyAdd, parseApplySet:
-					if (o & iv) != iv {
-						o += iv
+					if (out & icv) != icv {
+						out += icv
 					}
 				case parseApplySub:
-					if (o & iv) == iv {
-						o -= iv
+					if (out & icv) == icv {
+						out -= icv
 					}
 				}
 			}
 		default:
-			return os.FileMode(o), fmt.Errorf("%w: %s", ErrModeStringSyntax, perms)
+			return os.FileMode(out), fmt.Errorf("%w: %s", ErrModeStringSyntax, perms)
 		}
 	}
 
-	return os.FileMode(o), nil
+	return os.FileMode(out), nil
 }

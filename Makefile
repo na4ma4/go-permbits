@@ -16,7 +16,7 @@
 GINKGO := artifacts/ginkgo/bin/ginkgo
 $(GINKGO):
 	@mkdir -p "$(MF_PROJECT_ROOT)/$(@D)"
-	GOBIN="$(MF_PROJECT_ROOT)/$(@D)" go get github.com/onsi/ginkgo/ginkgo
+	GOBIN="$(MF_PROJECT_ROOT)/$(@D)" go install github.com/onsi/ginkgo/ginkgo@latest
 
 test:: $(GINKGO)
 	-@mkdir -p "artifacts/test"
