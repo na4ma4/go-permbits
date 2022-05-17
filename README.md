@@ -1,9 +1,9 @@
-# permbits
+# go-permbits
 
 Golang File Permission Bit Operators.
 
-[![CI](https://github.com/na4ma4/permbits/actions/workflows/ci.yml/badge.svg)](https://github.com/na4ma4/permbits/actions/workflows/ci.yml)
-[![GoDoc](https://godoc.org/github.com/na4ma4/permbits/src/jwt?status.svg)](https://godoc.org/github.com/na4ma4/permbits)
+[![CI](https://github.com/na4ma4/go-permbits/actions/workflows/ci.yml/badge.svg)](https://github.com/na4ma4/go-permbits/actions/workflows/ci.yml)
+[![GoDoc](https://godoc.org/github.com/na4ma4/go-permbits/src/jwt?status.svg)](https://godoc.org/github.com/na4ma4/go-permbits)
 
 ## Usage
 

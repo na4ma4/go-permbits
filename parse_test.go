@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/na4ma4/permbits"
+	"github.com/na4ma4/go-permbits"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"

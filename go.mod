@@ -1,4 +1,4 @@
-module github.com/na4ma4/permbits
+module github.com/na4ma4/go-permbits
 
 go 1.18
 
