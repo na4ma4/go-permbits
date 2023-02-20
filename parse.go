@@ -40,15 +40,17 @@ func MustString(perms string) os.FileMode {
 // that is comprised of them or 0 and an error if the input is invalid.
 //
 // Supported Modes
-//   References: ugoa
-//   Operators: +-=
-//   Modes: rwx
+//
+//	References: ugoa
+//	Operators: +-=
+//	Modes: rwx
 //
 // Special modes are not supported.
 //
 // Because the mode starts at 0 the `-` operator does not remove permissions unless they
 // were added earlier in the mode string.
-//nolint:cyclop,funlen // it's a long function.
+//
+//nolint:gocognit // it's a long function.
 func FromString(perms string) (os.FileMode, error) {
 	out := 0
 	mode := []parseMode{}

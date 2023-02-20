@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-//nolint:gosec,wrapcheck // test function
+//nolint:wrapcheck // test function
 func shellTest(mode string) (os.FileMode, error) {
 	tmpFile, err := os.CreateTemp("", "permbits-test-*")
 	if err != nil {
