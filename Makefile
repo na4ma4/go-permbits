@@ -8,16 +8,3 @@
 
 .makefiles/%:
 	@curl -sfL https://makefiles.dev/v1 | bash /dev/stdin "$@"
-
-######################
-# Testing
-######################
-
-GINKGO := artifacts/ginkgo/bin/ginkgo
-$(GINKGO):
-	@mkdir -p "$(MF_PROJECT_ROOT)/$(@D)"
-	GOBIN="$(MF_PROJECT_ROOT)/$(@D)" go install github.com/onsi/ginkgo/ginkgo@latest
-
-test:: $(GINKGO)
-	-@mkdir -p "artifacts/test"
-	$(GINKGO) -outputdir "artifacts/test/" -r --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --compilers=2 --nodes=2
