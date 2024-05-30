@@ -1,6 +1,7 @@
 package permbits_test
 
 import (
+	"io/fs"
 	"os"
 	"testing"
 
@@ -8,6 +9,8 @@ import (
 )
 
 func testSymbolicModes(t *testing.T, modeString string, is uint32) {
+	t.Helper()
+
 	mode, err := permbits.FromString(modeString)
 	if err != nil {
 		t.Errorf("[%s] error occurred: %s", modeString, err)
@@ -94,6 +97,8 @@ func TestParseReturnError(t *testing.T) {
 }
 
 func testShellChmod(t *testing.T, modeString string) {
+	t.Helper()
+
 	pbMode, err := permbits.FromString(modeString)
 	if err != nil {
 		t.Errorf("[%s] error occurred: %s", modeString, err)
@@ -147,7 +152,7 @@ func TestFromString_ResolveSymbolic(t *testing.T) {
 				t.Errorf("permbits.FromString() error = %v", err)
 			}
 			if mode != tt.is {
-				t.Errorf("permbits.FromString() = %04o, want = %04o", mode, tt.is)
+				t.Errorf("permbits.FromString() = 0o%04o, want = 0o%04o", mode, tt.is)
 			}
 		})
 	}
@@ -173,12 +178,12 @@ func TestFromString_ResolveSymbolicExample(t *testing.T) {
 				t.Errorf("permbits.FromString() error = %v", err)
 			}
 			if mode != tt.is {
-				t.Errorf("permbits.FromString() = %04o, want = %04o", mode, tt.is)
+				t.Errorf("permbits.FromString() = 0o%04o, want = 0o%04o", mode, tt.is)
 			}
 
 			pbtest := func(mode, match os.FileMode, expect bool) {
 				if v := permbits.Is(mode, match); v != expect {
-					t.Errorf("permbits.FromString() = %04o to return %t for %04o, but returned %t", mode, expect, match, v)
+					t.Errorf("permbits.FromString() = 0o%04o to return %t for 0o%04o, but returned %t", mode, expect, match, v)
 				}
 			}
 
@@ -196,13 +201,25 @@ func TestFromString_ResolveSymbolicExample(t *testing.T) {
 }
 
 func TestFromString_ValidParseNoError(t *testing.T) {
-	tests := []string{
-		"u+rg+ro+r",
+	tests := []struct {
+		expect     fs.FileMode
+		modeString string
+	}{
+		{0o0444, "u+rg+ro+r"},
+		{0o0440, "u+rg+r"},
 	}
 	for _, tt := range tests {
-		t.Run(tt, func(t *testing.T) {
-			if _, err := permbits.FromString(tt); err != nil {
+		t.Run(tt.modeString, func(t *testing.T) {
+			mode, err := permbits.FromString(tt.modeString)
+			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)
+			}
+
+			if mode != tt.expect {
+				t.Errorf("permbits.FromString(): got '0o%04o', want '0o%04o'",
+					mode,
+					tt.expect,
+				)
 			}
 		})
 	}

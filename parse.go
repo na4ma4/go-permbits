@@ -56,7 +56,7 @@ func FromString(perms string) (os.FileMode, error) {
 	mode := []parseMode{}
 	apply := parseApplyNone
 
-	for idx := 0; idx < len(perms); idx++ {
+	for idx := range len(perms) {
 		switch perms[idx] {
 		case 'u':
 			mode = append(mode, parseUser)
