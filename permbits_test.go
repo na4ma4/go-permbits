@@ -1,6 +1,7 @@
 package permbits_test
 
 import (
+	"fmt"
 	"os"
 	"testing"
 
@@ -88,5 +89,40 @@ func TestIs_CompareMultipleModes(t *testing.T) {
 				t.Errorf("permbits.Is() returned %t, expected %t for %04o matching %04o", v, tt.want, tt.mode, tt.is)
 			}
 		})
+	}
+}
+
+func TestForce(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		mode   os.FileMode
+		expect os.FileMode
+		want   []os.FileMode
+	}{
+		{
+			0o111, 0o711,
+			[]os.FileMode{permbits.UserReadWriteExecute},
+		},
+		{
+			0o111, 0o711,
+			[]os.FileMode{permbits.UserRead, permbits.UserWrite, permbits.UserExecute},
+		},
+		{
+			0o111, 0o171,
+			[]os.FileMode{permbits.GroupRead, permbits.GroupWrite, permbits.GroupExecute},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(
+			fmt.Sprintf("%04o + %v = %04o", tt.mode, tt.want, tt.expect),
+			func(t *testing.T) {
+				t.Parallel()
+
+				if v := permbits.Force(tt.mode, tt.want...); v != tt.expect {
+					t.Errorf("permbits.Force() got '%04o', want '%04o'", v, tt.expect)
+				}
+			},
+		)
 	}
 }

@@ -19,8 +19,10 @@ func shellTest(mode string) (os.FileMode, error) {
 	}
 
 	name := tmpFile.Name()
-
 	tmpFile.Close()
+	defer func() {
+		_ = os.Remove(name)
+	}()
 
 	cmd := exec.Command(`chmod`, "ugo=", name)
 	if err = cmd.Run(); err != nil {
@@ -34,10 +36,6 @@ func shellTest(mode string) (os.FileMode, error) {
 
 	stv, err := os.Stat(name)
 	if err != nil {
-		return 0, err
-	}
-
-	if err = os.Remove(name); err != nil {
 		return 0, err
 	}
 
