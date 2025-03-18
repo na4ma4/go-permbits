@@ -11,10 +11,9 @@ import (
 	"github.com/dosquad/mage"
 )
 
-// Install update, protoc, format, tidy, lint & test.
-func Install(ctx context.Context) {
-	mg.CtxDeps(ctx, mage.Lint)
+// Local update, protoc, format, tidy, lint & test.
+func Local(ctx context.Context) {
 	mg.CtxDeps(ctx, mage.Test)
 }
 
-var Default = Install
+var Default = Local

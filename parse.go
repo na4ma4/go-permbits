@@ -52,7 +52,7 @@ func MustString(perms string) os.FileMode {
 //
 //nolint:gocognit // it's a long function.
 func FromString(perms string) (os.FileMode, error) {
-	out := 0
+	out := uint32(0)
 	mode := []parseMode{}
 	apply := parseApplyNone
 
@@ -76,7 +76,7 @@ func FromString(perms string) (os.FileMode, error) {
 		case '=':
 			apply = parseApplySet
 		case 'r', 'w', 'x':
-			val := 0
+			val := uint32(0)
 
 			switch perms[idx] {
 			case 'r':
