@@ -3,7 +3,6 @@
 package permbits_test
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"testing"
@@ -53,7 +52,7 @@ func TestFromString_CompareToCommandLine(t *testing.T) {
 		"a=r,g-w",
 	}
 	for _, tt := range tests {
-		t.Run(fmt.Sprintf("Compare to command line: %s", tt), func(t *testing.T) {
+		t.Run("Compare to command line: "+tt, func(t *testing.T) {
 			pbMode, err := permbits.FromString(tt)
 			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)
