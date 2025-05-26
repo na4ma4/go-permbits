@@ -183,7 +183,10 @@ func TestFromString_ResolveSymbolicExample(t *testing.T) {
 
 			pbtest := func(mode, match os.FileMode, expect bool) {
 				if v := permbits.Is(mode, match); v != expect {
-					t.Errorf("permbits.FromString() = 0o%04o to return %t for 0o%04o, but returned %t", mode, expect, match, v)
+					t.Errorf(
+						"permbits.FromString() = 0o%04o to return %t for 0o%04o, but returned %t",
+						mode, expect, match, v,
+					)
 				}
 			}
 
