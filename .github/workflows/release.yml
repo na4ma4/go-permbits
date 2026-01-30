@@ -2,11 +2,20 @@ name: Release
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
-  goreleaser:
-    name: "Goreleaser"
-    uses: na4ma4/actions/.github/workflows/goreleaser.yml@main
-    secrets: inherit
+  release-please:
+    name: "Release Please"
+    uses: na4ma4/actions/.github/workflows/release-please.yml@main
+    with:
+      artifacts: false
+      platforms: "linux/amd64,linux/arm64,darwin/arm64,windows/amd64"
+    secrets:
+      RELEASE_PLEASE_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
