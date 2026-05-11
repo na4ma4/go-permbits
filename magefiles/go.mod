@@ -6,7 +6,7 @@ replace github.com/na4ma4/go-permbits => ../
 
 require (
 	github.com/dosquad/mage v0.3.4
-	github.com/magefile/mage v1.15.0
+	github.com/magefile/mage v1.17.2
 )
 
 require (
