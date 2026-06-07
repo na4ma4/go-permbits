@@ -1,3 +1,3 @@
 module github.com/na4ma4/go-permbits
 
-go 1.24.1
+go 1.25.0
