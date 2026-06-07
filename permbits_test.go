@@ -14,6 +14,7 @@ const (
 )
 
 func TestIs_CompareSingleModeAll(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		name string
 		mode os.FileMode
@@ -31,6 +32,7 @@ func TestIs_CompareSingleModeAll(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if v := permbits.Is(tt.mode, tt.is); !v {
 				t.Errorf("permbits.Is() returned %t for %04o matching %04o", v, tt.mode, tt.is)
 			}
@@ -39,6 +41,7 @@ func TestIs_CompareSingleModeAll(t *testing.T) {
 }
 
 func TestIs_CompareSingleModeNone(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		name string
 		mode os.FileMode
@@ -56,6 +59,7 @@ func TestIs_CompareSingleModeNone(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if v := permbits.Is(tt.mode, tt.is); v {
 				t.Errorf("permbits.Is() returned %t for %04o matching %04o", v, tt.mode, tt.is)
 			}
@@ -64,6 +68,7 @@ func TestIs_CompareSingleModeNone(t *testing.T) {
 }
 
 func TestIs_CompareMultipleModes(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		name string
 		mode os.FileMode
@@ -85,6 +90,7 @@ func TestIs_CompareMultipleModes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			if v := permbits.Is(tt.mode, tt.is); v != tt.want {
 				t.Errorf("permbits.Is() returned %t, expected %t for %04o matching %04o", v, tt.want, tt.mode, tt.is)
 			}

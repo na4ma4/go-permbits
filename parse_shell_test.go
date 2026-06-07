@@ -42,6 +42,7 @@ func shellTest(mode string) (os.FileMode, error) {
 }
 
 func TestFromString_CompareToCommandLine(t *testing.T) {
+	t.Parallel()
 	tests := []string{
 		"a+r",
 		"a-x",
@@ -53,6 +54,7 @@ func TestFromString_CompareToCommandLine(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run("Compare to command line: "+tt, func(t *testing.T) {
+			t.Parallel()
 			pbMode, err := permbits.FromString(tt)
 			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)

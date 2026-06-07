@@ -59,7 +59,7 @@ const (
 	OtherAll os.FileMode = OtherReadWriteExecute
 )
 
-// Is compares a supplied os.FileMode and returns true if it contains a reference mode.
+// Is compares a supplied [os.FileMode] and returns true if it contains a reference mode.
 func Is(mode os.FileMode, is os.FileMode) bool {
 	return (mode & is) == is
 }

@@ -36,7 +36,7 @@ func MustString(perms string) os.FileMode {
 	return mode
 }
 
-// FromString takes a subset of the available symbolic modes and returns a os.FileMode
+// FromString takes a subset of the available symbolic modes and returns a [os.FileMode]
 // that is comprised of them or 0 and an error if the input is invalid.
 //
 // Supported Modes

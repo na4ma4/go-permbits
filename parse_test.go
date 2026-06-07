@@ -23,6 +23,7 @@ func testSymbolicModes(t *testing.T, modeString string, is uint32) {
 }
 
 func TestParseSymbolicModes(t *testing.T) {
+	t.Parallel()
 	list := map[string]uint32{
 		"a+r":         0o444,
 		"a-x":         0o000,
@@ -38,6 +39,7 @@ func TestParseSymbolicModes(t *testing.T) {
 }
 
 func TestParseSymbolicMode1(t *testing.T) {
+	t.Parallel()
 	modeString := "u+r,g+r,o+r"
 	mode, err := permbits.FromString(modeString)
 	if err != nil {
@@ -81,6 +83,7 @@ func TestParseSymbolicMode1(t *testing.T) {
 }
 
 func TestParseWeirdValue(t *testing.T) {
+	t.Parallel()
 	modeString := "u+rg+ro+r"
 	_, err := permbits.FromString(modeString)
 	if err != nil {
@@ -89,6 +92,7 @@ func TestParseWeirdValue(t *testing.T) {
 }
 
 func TestParseReturnError(t *testing.T) {
+	t.Parallel()
 	modeString := "a:r"
 	_, err := permbits.FromString(modeString)
 	if err == nil {
@@ -117,6 +121,7 @@ func testShellChmod(t *testing.T, modeString string) {
 }
 
 func TestShellChangeMode(t *testing.T) {
+	t.Parallel()
 	list := []string{
 		"a+r",
 		"a-x",
@@ -132,6 +137,7 @@ func TestShellChangeMode(t *testing.T) {
 }
 
 func TestFromString_ResolveSymbolic(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		name       string
 		modeString string
@@ -147,6 +153,7 @@ func TestFromString_ResolveSymbolic(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			mode, err := permbits.FromString(tt.modeString)
 			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)
@@ -159,6 +166,7 @@ func TestFromString_ResolveSymbolic(t *testing.T) {
 }
 
 func TestFromString_ResolveSymbolicExample(t *testing.T) {
+	t.Parallel()
 	type tv struct {
 		read, write, execute bool
 	}
@@ -173,6 +181,7 @@ func TestFromString_ResolveSymbolicExample(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
 			mode, err := permbits.FromString(tt.modeString)
 			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)
@@ -204,6 +213,7 @@ func TestFromString_ResolveSymbolicExample(t *testing.T) {
 }
 
 func TestFromString_ValidParseNoError(t *testing.T) {
+	t.Parallel()
 	tests := []struct {
 		expect     fs.FileMode
 		modeString string
@@ -213,6 +223,7 @@ func TestFromString_ValidParseNoError(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.modeString, func(t *testing.T) {
+			t.Parallel()
 			mode, err := permbits.FromString(tt.modeString)
 			if err != nil {
 				t.Errorf("permbits.FromString() error = %v", err)
@@ -229,11 +240,13 @@ func TestFromString_ValidParseNoError(t *testing.T) {
 }
 
 func TestFromString_InvalidParseError(t *testing.T) {
+	t.Parallel()
 	tests := []string{
 		"a:r",
 	}
 	for _, tt := range tests {
 		t.Run(tt, func(t *testing.T) {
+			t.Parallel()
 			if _, err := permbits.FromString(tt); err == nil {
 				t.Errorf("permbits.FromString() should return error for %s", tt)
 			}
