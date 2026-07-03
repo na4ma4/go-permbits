@@ -1,6 +1,6 @@
 module github.com/na4ma4/go-permbits/magefiles
 
-go 1.24.1
+go 1.25.0
 
 replace github.com/na4ma4/go-permbits => ../
 
@@ -25,8 +25,8 @@ require (
 	github.com/na4ma4/go-permbits v0.5.3 // indirect
 	github.com/princjef/mageutil v1.0.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
