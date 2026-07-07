@@ -3,7 +3,6 @@ updates:
   - package-ecosystem: "gomod"
     directories:
       - "/"
-      - "/magefiles"
     schedule:
       interval: "weekly"
     groups:
@@ -14,7 +13,6 @@ updates:
   - package-ecosystem: "github-actions"
     directories:
       - /
-      - /.github/actions/*
     schedule:
       interval: "weekly"
     groups:
