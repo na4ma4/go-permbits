@@ -3,7 +3,7 @@ module github.com/na4ma4/go-permbits
 go 1.25.0
 
 require (
-	github.com/dosquad/mage v0.4.0
+	github.com/dosquad/mage v0.5.0
 	github.com/magefile/mage v1.17.2
 )
 
@@ -23,6 +23,6 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/net v0.56.0 // indirect
 	golang.org/x/sys v0.46.0 // indirect
-	golang.org/x/text v0.39.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
