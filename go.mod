@@ -3,7 +3,7 @@ module github.com/na4ma4/go-permbits
 go 1.25.0
 
 require (
-	github.com/dosquad/mage v0.5.0
+	github.com/dosquad/mage v0.5.1
 	github.com/magefile/mage v1.17.2
 )
 
